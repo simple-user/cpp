@@ -1,0 +1,21 @@
+node * indexator(size_t &curIndex, size_t index, node *n)
+        {
+                if (!n)
+                        return nullptr;
+
+                node *res = nullptr;
+                if (n->left && curIndex<=index) res = indexator(curIndex, index, n->left);
+                // ++curIndex; //щоб далі не йшли по дереву (+ відпрацьовуємо даний вузол)
+                if (curIndex == index+1)
+                {
+                        ++curIndex;
+                        return n;
+                }
+                else if (curIndex <= index)
+                {
+                        // вже починається вихід зі стеку, тому приплюсовуємо curIndex
+                        ++curIndex;
+                }
+                if (n->right && curIndex <= index) res = indexator(curIndex, index, n->right);
+                return res;
+        }
